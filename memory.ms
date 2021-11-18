@@ -43,12 +43,19 @@ boardOriginY=640/2-(boardHeight/2)
 // gfx still points to the (now detached) pixel display
 display(5).mode = displayMode.off
 
-createCardBackImg = function()
-	boxOriginX = 0
-	boxOriginY = 0
+drawCardBack = function()
 	gfx.color = cardColor
-	gfx.fillRect boxOriginX,boxOriginY,boxWidth,boxHeight
-	return gfx.getImage(boxOriginX,boxOriginY,boxWidth,boxHeight)
+	gfx.fillEllipse 0,0,15,15
+	gfx.fillEllipse boxWidth-15,0,15,15
+	gfx.fillEllipse 0,boxHeight-15,15,15
+	gfx.fillEllipse boxWidth-15,boxHeight-15,15,15
+	gfx.fillRect 15/2,0,boxWidth-15,boxHeight
+	gfx.fillRect 0,15/2,boxWidth,boxHeight-15
+end function
+
+createCardBackImg = function()
+	drawCardBack
+	return gfx.getImage(0,0,boxWidth,boxHeight)
 end function
 
 cards = []
@@ -84,10 +91,9 @@ end function
 
 for fileName in foodFileNames
 	img = file.loadImage("/sys/pics/food/"+fileName)
+	drawCardBack
 	boxOriginX = 0
 	boxOriginY = 0
-	gfx.color = cardColor
-	gfx.fillRect boxOriginX,boxOriginY,boxWidth,boxHeight
 	gfx.color = color.white
 	gfx.fillRect(boxOriginX+boxBorder,
 	boxOriginY+boxBorder,
