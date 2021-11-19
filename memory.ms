@@ -54,6 +54,7 @@ drawCardBack = function()
 end function
 
 createCardBackImg = function()
+	gfx.clear color.clear
 	drawCardBack
 	return gfx.getImage(0,0,boxWidth,boxHeight)
 end function
@@ -91,6 +92,7 @@ end function
 
 for fileName in foodFileNames
 	img = file.loadImage("/sys/pics/food/"+fileName)
+	gfx.clear color.clear
 	drawCardBack
 	boxOriginX = 0
 	boxOriginY = 0
