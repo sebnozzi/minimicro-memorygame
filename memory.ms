@@ -222,19 +222,36 @@ while true
 		endTime = time
 		timeTaken = round(endTime-startTime,0)
 		print "Solved! (in "+attempts+" attempts and "+timeTaken+" seconds)"
-		choice = input("Play again? (y/n) ")
-		if choice.lower.indexOf("y") == 0 then
-			// Start all over
-			run
-		else
-			exit
-		end if		
+		print "Press a key to play again"
+		key.get
+		// Start all over
+		run
+	end if
+	
+	if key.pressed("r") then
+		
 	end if
 	
 	if key.available then
 		k = key.get
 		if k == "q" or key.pressed("escape") then
 			exit
+		else if k == "r" then
+			// Cheat mode - reveal all cards for a while
+			for card in cards
+				card.showFront
+			end for
+			// Wait until key no longer pressed
+			while key.pressed("r")
+				wait 0.1
+				yield
+			end while
+			// Hide non-paired cards
+			for card in cards
+				if pairedCards.indexOf(card) == null then
+					card.showBack
+				end if
+			end for
 		end if
 	end if
 	
