@@ -199,6 +199,7 @@ while true
 	if len(attemptedCards) == 2 then
 		cardA = attemptedCards[0]
 		cardB = attemptedCards[1]
+		attempts = attempts + 1
 		if cardA.otherPair == cardB then
 			// Match found!
 			matchedCards = [cardA, cardB]
@@ -213,7 +214,6 @@ while true
 				s.showBack
 			end for
 			attemptedCards = []
-			attempts = attempts + 1
 		end if
 	end if	
 	
