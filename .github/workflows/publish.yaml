@@ -1,0 +1,19 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+
+  publish:
+    uses: sebnozzi/minimicro-actions/.github/workflows/itch-deploy.yaml@main
+    with:
+      minidisk_main_file: memory.ms
+      custom_executable_name: MemoryGame
+      itch_io_username: sebnozzi
+      itch_io_game_id: memory-game
+    secrets:
+      itch_io_api_key: ${{ secrets.ITCH_IO_API_KEY }}
